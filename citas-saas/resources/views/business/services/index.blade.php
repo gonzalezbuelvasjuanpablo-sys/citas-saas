@@ -1,24 +1,16 @@
 @extends('layouts.business')
 
 @section('content')
-
     <div class="flex justify-between items-center mb-6">
         <div>
             <h2 class="text-2xl font-bold text-gray-800">Servicios</h2>
             <p class="text-gray-500">Gestiona los servicios de tu negocio</p>
         </div>
-        <a href="{{ route('business.services.create') }}"
-           class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 font-medium">
-            + Nuevo servicio
-        </a>
+        <a href="{{ route('business.services.create') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 font-medium">+ Nuevo servicio</a>
     </div>
-
     @if(session('success'))
-        <div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-6">
-            {{ session('success') }}
-        </div>
+        <div class="bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-6">{{ session('success') }}</div>
     @endif
-
     <div class="bg-white rounded-xl shadow overflow-hidden">
         <table class="w-full text-sm">
             <thead class="bg-gray-50">
@@ -47,10 +39,8 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 flex gap-3">
-                            <a href="{{ route('business.services.edit', $service) }}"
-                               class="text-indigo-600 hover:underline">Editar</a>
-                            <form method="POST" action="{{ route('business.services.destroy', $service) }}"
-                                  onsubmit="return confirm('¿Eliminar este servicio?')">
+                            <a href="{{ route('business.services.edit', $service) }}" class="text-indigo-600 hover:underline">Editar</a>
+                            <form method="POST" action="{{ route('business.services.destroy', $service) }}" onsubmit="return confirm('¿Eliminar este servicio?')">
                                 @csrf
                                 @method('DELETE')
                                 <button class="text-red-500 hover:underline">Eliminar</button>
@@ -59,13 +49,10 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-8 text-center text-gray-400">
-                            No hay servicios registrados aún.
-                        </td>
+                        <td colspan="5" class="px-6 py-8 text-center text-gray-400">No hay servicios registrados aún.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
-
 @endsection
