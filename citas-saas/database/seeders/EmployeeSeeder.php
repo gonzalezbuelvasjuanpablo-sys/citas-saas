@@ -11,7 +11,7 @@ class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        $business = Business::where('slug', 'barberia-el-tigre')->first();
+        $business = Business::first();
 
         $juan = User::where('email', 'juan@barberiaeltigre.com')->first();
         $luis = User::where('email', 'luis@barberiaeltigre.com')->first();

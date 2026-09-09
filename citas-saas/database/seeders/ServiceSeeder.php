@@ -10,7 +10,7 @@ class ServiceSeeder extends Seeder
 {
     public function run(): void
     {
-        $business = Business::where('slug', 'barberia-el-tigre')->first();
+        $business = Business::first();
 
         $services = [
             [

@@ -13,7 +13,6 @@ class UserSeeder extends Seeder
     {
         $business = Business::first();
 
-        // Dueño del negocio
         $owner = User::create([
             'name'        => 'Carlos Martínez',
             'email'       => 'carlos@barberiaeltigre.com',
@@ -22,7 +21,6 @@ class UserSeeder extends Seeder
         ]);
         $owner->assignRole('business_owner');
 
-        // Barbero 1
         $barber1 = User::create([
             'name'        => 'Juan Pérez',
             'email'       => 'juan@barberiaeltigre.com',
@@ -31,7 +29,6 @@ class UserSeeder extends Seeder
         ]);
         $barber1->assignRole('employee');
 
-        // Barbero 2
         $barber2 = User::create([
             'name'        => 'Luis García',
             'email'       => 'luis@barberiaeltigre.com',
@@ -40,7 +37,6 @@ class UserSeeder extends Seeder
         ]);
         $barber2->assignRole('employee');
 
-        // Cliente de prueba
         $client = User::create([
             'name'        => 'Pedro Rodríguez',
             'email'       => 'pedro@gmail.com',

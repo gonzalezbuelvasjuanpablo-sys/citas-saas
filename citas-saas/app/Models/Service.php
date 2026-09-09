@@ -9,28 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Service extends Model
 {
     protected $fillable = [
-        'business_id',
-        'name',
-        'description',
-        'duration_minutes',
-        'price',
-        'is_active',
+        'business_id', 'name', 'description',
+        'duration_minutes', 'price', 'is_active',
     ];
+    protected $casts = ['is_active' => 'boolean', 'price' => 'decimal:2'];
 
-    protected $casts = [
-        'is_active' => 'boolean',
-        'price' => 'decimal:2',
-    ];
-
-    // Un servicio pertenece a un negocio
-    public function business(): BelongsTo
-    {
-        return $this->belongsTo(Business::class);
-    }
-
-    // Un servicio tiene muchas citas
-    public function appointments(): HasMany
-    {
-        return $this->hasMany(Appointment::class);
-    }
+    public function business(): BelongsTo { return $this->belongsTo(Business::class); }
+    public function appointments(): HasMany { return $this->hasMany(Appointment::class); }
 }

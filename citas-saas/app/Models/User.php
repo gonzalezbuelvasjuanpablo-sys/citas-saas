@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,8 +13,14 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasRoles, Notifiable;
+    /** @use HasFactory<UserFactory> */
+    use HasFactory, Notifiable, HasRoles;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'email',
@@ -19,11 +28,21 @@ class User extends Authenticatable
         'business_id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [
@@ -32,19 +51,25 @@ class User extends Authenticatable
         ];
     }
 
-    // Un usuario pertenece a un negocio
+    /**
+     * Get the business that the user belongs to.
+     */
     public function business(): BelongsTo
     {
         return $this->belongsTo(Business::class);
     }
 
-    // Un usuario puede ser empleado
+    /**
+     * Get the employee profile associated with the user.
+     */
     public function employee(): HasOne
     {
         return $this->hasOne(Employee::class);
     }
 
-    // Un usuario puede ser cliente
+    /**
+     * Get the client profile associated with the user.
+     */
     public function client(): HasOne
     {
         return $this->hasOne(Client::class);
