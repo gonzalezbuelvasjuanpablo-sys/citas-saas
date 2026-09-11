@@ -5,10 +5,18 @@ use App\Http\Controllers\Business\DashboardController;
 use App\Http\Controllers\Business\ServiceController;
 use App\Http\Controllers\Business\EmployeeController;
 use App\Http\Controllers\Business\AppointmentController;
+use App\Http\Controllers\Booking\BookingController;
 
 // Ruta pública de inicio
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::prefix('book')->name('booking.')->group(function () {
+    Route::get('/{slug}', [BookingController::class, 'show'])->name('show');
+    Route::get('/{slug}/slots', [BookingController::class, 'slots'])->name('slots');
+    Route::post('/{slug}', [BookingController::class, 'store'])->name('store');
 });
 
 // Rutas de autenticación (las genera Breeze)
