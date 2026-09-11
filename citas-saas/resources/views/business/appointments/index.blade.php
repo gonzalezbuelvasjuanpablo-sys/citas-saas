@@ -39,7 +39,7 @@
                                 {{ $appointment->status === 'cancelled' ? 'bg-red-100 text-red-700' : '' }}
                                 {{ $appointment->status === 'completed' ? 'bg-blue-100 text-blue-700' : '' }}
                                 {{ $appointment->status === 'no_show' ? 'bg-gray-100 text-gray-700' : '' }}">
-                                {{ ucfirst($appointment->status) }}
+                                {{ ['pending' => 'Pendiente', 'confirmed' => 'Confirmada', 'completed' => 'Completada', 'cancelled' => 'Cancelada', 'no_show' => 'No asistió'][$appointment->status] ?? $appointment->status }}
                             </span>
                         </td>
                         <td class="px-6 py-4 flex gap-3">

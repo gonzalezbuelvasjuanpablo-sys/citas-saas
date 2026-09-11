@@ -5,6 +5,21 @@
         <h2 class="text-2xl font-bold text-gray-800">Dashboard</h2>
         <p class="text-gray-500">Bienvenido, {{ auth()->user()->name }}</p>
     </div>
+
+        <!-- Link de reservas -->
+    <div class="bg-indigo-50 border border-indigo-200 rounded-xl px-6 py-4 mb-6 flex items-center justify-between">
+        <div>
+            <p class="text-sm font-medium text-indigo-700">Tu link de reservas</p>
+            <p class="text-indigo-600 font-mono text-sm mt-1">
+                {{ url('/book/' . $business->slug) }}
+            </p>
+        </div>
+        <a href="{{ url('/book/' . $business->slug) }}" target="_blank"
+           class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">
+            Ver página
+        </a>
+    </div>
+    
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div class="bg-white rounded-xl shadow p-6">
             <p class="text-sm text-gray-500">Citas hoy</p>
@@ -50,7 +65,7 @@
                                     {{ $appointment->status === 'confirmed' ? 'bg-green-100 text-green-700' : '' }}
                                     {{ $appointment->status === 'pending' ? 'bg-yellow-100 text-yellow-700' : '' }}
                                     {{ $appointment->status === 'cancelled' ? 'bg-red-100 text-red-700' : '' }}">
-                                    {{ ucfirst($appointment->status) }}
+                                    {{ ['pending' => 'Pendiente', 'confirmed' => 'Confirmada', 'completed' => 'Completada', 'cancelled' => 'Cancelada', 'no_show' => 'No asistió'][$appointment->status] ?? $appointment->status }}
                                 </span>
                             </td>
                         </tr>
