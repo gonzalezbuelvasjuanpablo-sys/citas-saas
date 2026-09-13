@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Business;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ServiceController extends Controller
 {
@@ -16,13 +17,18 @@ class ServiceController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('business.services.index', compact('services', 'business'));
+        return Inertia::render('Business/Services/Index', [
+            'services' => $services,
+            'business' => $business,
+        ]);
     }
 
     public function create()
     {
         $business = auth()->user()->business;
-        return view('business.services.create', compact('business'));
+        return Inertia::render('Business/Services/Create', [
+            'business' => $business,
+        ]);
     }
 
     public function store(Request $request)
@@ -53,7 +59,10 @@ class ServiceController extends Controller
     {
         $business = auth()->user()->business;
         $this->authorize('update', $service);
-        return view('business.services.edit', compact('service', 'business'));
+        return Inertia::render('Business/Services/Edit', [
+            'service'  => $service,
+            'business' => $business,
+        ]);
     }
 
     public function update(Request $request, Service $service)
